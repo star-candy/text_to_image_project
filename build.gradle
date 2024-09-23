@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // OkHttp 최신 버전
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+    implementation 'com.squareup.okio:okio:3.4.0'  // okhttp3 사용시 하위 버전 보안 문제 발생으로 인한 명시적 의존성
+
+    // Jackson 최신 버전
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    // JUnit 5 최신 버전
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+    useJUnitPlatform()  // JUnit 5를 사용하도록 설정
+}
