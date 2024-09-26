@@ -67,15 +67,15 @@ text_to_image_project
   - TextToPromptManager : ai 프롬프트 변환 class
     - requestGpt : 게시글을 ai 프롬프트로 변환 요청 (GptRequestDto 받아 변환)
     
-  - PromptToImageManager : ai 이미지 생성 class
-    - requestHuggingface : 프롬프트를 통해 이미지 생성 요청 (HuggingfaceRequestDto 받아 이미지 생성)
-    - downloadImage : 이미지 다운로드 요청 (url 받아 이미지 다운로드)
+  - PromptToImageManager : ai 이미지 생성 class (0)
+    - requestHuggingface : 프롬프트를 통해 이미지 생성 요청 (HuggingfaceRequestDto 받아 이미지 생성) (0)
+    - downloadImage : 이미지 다운로드 요청 (url 받아 이미지 다운로드) (0)
 
   
 - **dto**
   - BoardDTO : 게시글 형식(제목, 내용)에 대한 전달 객체 class
   - GptRequestDto : 사용자 글 내용 -> api 요청 형태로 전달 객체
-  - HuggingfaceRequestDto : api 요청 형태로 전달 객체
+  - HuggingfaceRequestDto : api 요청 형태로 전달 객체 (0)
 
 - **repository (DB)**
   - BoardDb : 게시판 db class
