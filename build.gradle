@@ -15,6 +15,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
     // OkHttp 최신 버전
     implementation 'com.squareup.okhttp3:okhttp:4.11.0'
