@@ -78,8 +78,9 @@ text_to_image_project
   - HuggingfaceRequestDto : api 요청 형태로 전달 객체 (0)
 
 - **repository (DB)**
-  - BoardDb : 게시판 db class
+  - BoardDb : 게시판 db class (0)
     - vector<boardDTO> database : vector 통한 db 구현
+    - dataBase 전체 수정기능 : 생성자 통한 초기화 지원
     - creteBoard : 게시글 생성 (boardDto 받아 add)
     - readBoard : 게시글 조회 (index 해당하는 boardDto 반환)
     - updateBoard : 게시글 수정 (boardDto 받아 해당 index 값 수정)
