@@ -73,7 +73,7 @@ text_to_image_project
 
   
 - **dto**
-  - BoardDTO : 게시글 형식(제목, 내용)에 대한 전달 객체 class
+  - BoardDTO : 게시글 형식(제목, 내용)에 대한 전달 객체 class (0)
   - GptRequestDto : 사용자 글 내용 -> api 요청 형태로 전달 객체
   - HuggingfaceRequestDto : api 요청 형태로 전달 객체 (0)
 
