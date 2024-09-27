@@ -55,12 +55,12 @@ text_to_image_project
   - TextToImageService : ai 기능 관리 class
   
 - **model**
-  - CrudManager : 게시판 crud 기능 관리 class
-    - requestCreate : 게시글 생성 요청 (BoardDto 받아 db에 추가)
-    - requestRead : 게시글 조회 요청 (index 받아 BoardDto 반환)
-    - requestUpdate : 게시글 수정 요청 (index, BoardDto 받아 수정)
-    - requestDelete : 게시글 삭제 요청 (index 받아 삭제)
-    - requestFull : 게시글 전체 조회 요청 (vector 반환)
+  - CrudManager : 게시판 crud 기능 관리 class (0)
+    - requestCreate : 게시글 생성 요청 (BoardDto 받아 db에 추가) (0)
+    - requestRead : 게시글 조회 요청 (index 받아 BoardDto 반환) (0)
+    - requestUpdate : 게시글 수정 요청 (index, BoardDto 받아 수정) (0)
+    - requestDelete : 게시글 삭제 요청 (index 받아 삭제) (0)
+    - requestFull : 게시글 전체 조회 요청 (vector 반환) (0)
   - FileIoManager : db 내용과 파일 간 상호작용 class
     - saveDbToFile : db 내용을 파일에 저장 (process 종료시 사용할 것)
     - loadDbFromFile : 파일 내용을 db에 로드 (process 시작시 사용할 것)

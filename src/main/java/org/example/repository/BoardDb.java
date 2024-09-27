@@ -10,23 +10,23 @@ public class BoardDb {
         dataBase = initializeDb;
     }
 
-    public void createBoard(BoardDTO board) {
+    public static void createBoard(BoardDTO board) {
         dataBase.add(board);
     }
 
-    public BoardDTO readBoard(int index) {
+    public static BoardDTO readBoard(int index) {
         return dataBase.get(index);
     }
 
-    public void updateBoard(int index, BoardDTO board) {
+    public static void updateBoard(int index, BoardDTO board) {
         dataBase.set(index, board);
     }
 
-    public void deleteBoard(int index) {
+    public static void deleteBoard(int index) {
         dataBase.remove(index);
     }
 
-    public Vector<BoardDTO> fullBoard() {
+    public static Vector<BoardDTO> fullBoard() {
         return dataBase;
     }
 
