@@ -3,8 +3,8 @@ package org.example.dto;
 import okhttp3.*;
 
 public class HuggingfaceRequestDto {
-    private static final String API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"; // FLUX 모델 URL
-    private static final String API_KEY = "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"; // Hugging Face API 키
+    private static final String API_URL = ""; // FLUX 모델 URL
+    private static final String API_KEY = ""; // Hugging Face API 키
     private final String prompt;
 
     public HuggingfaceRequestDto(String prompt) {
