@@ -9,21 +9,15 @@ public class PromptToImageManagerTest {
 
     @Test
     public void testImage1() {
-        String prompt = "a dog sitting on a couch";
-        try {
-            manager.downloadImage(prompt);
-        } catch (IOException e) {
-            System.out.println("1실패: " + e.getMessage());
-        }
+        String prompt = "a hat on a cat";
+        manager.downloadImage(prompt);
+        while(true);
     }
 
     @Test
     public void testImage2() {
-        String prompt = "a cat walking on sunset";
-        try {
-            manager.downloadImage(prompt);
-        } catch (IOException e) {
-            System.out.println("2실패: " + e.getMessage());
-        }
+        String prompt = "a dog in the space";
+        manager.downloadImage(prompt);
+        while(true);
     }
 }
