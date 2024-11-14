@@ -25,7 +25,7 @@ dependencies {
     implementation 'com.squareup.okio:okio:3.4.0'  // okhttp3 사용시 하위 버전 보안 문제 발생으로 인한 명시적 의존성
 
     // Jackson 최신 버전
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    //implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 
     // JUnit 5 최신 버전
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'

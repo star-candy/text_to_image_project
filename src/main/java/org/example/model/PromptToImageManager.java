@@ -1,40 +1,41 @@
 package org.example.model;
 
-import java.util.concurrent.TimeUnit;
-import okhttp3.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import okhttp3.*;
 import org.example.dto.HuggingfaceRequestDto;
 
 public class PromptToImageManager {
     private static int OUTPUT_IMAGE_NUM = 0;
     private static final String userHome = System.getProperty("user.home");
     private static final String downloadDir = userHome + "\\Downloads";
-    private final String prompt;
-    private Request request;
+    private final OkHttpClient client;
 
-    PromptToImageManager(String prompt) {
-        OUTPUT_IMAGE_NUM++;
-        this.prompt = prompt;
-    }
-
-    public void requestHuggingface() {
-        HuggingfaceRequestDto huggingfaceRequestDto = new HuggingfaceRequestDto(prompt);
-        request = huggingfaceRequestDto.generateJsonRequest();
-    }
-
-    public void downloadImage() throws IOException {
-        // OkHttpClient timeout 설정 - 이미지 생성 응답 2분정도 소요 될 것
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS) // 연결 타임아웃
-                .writeTimeout(30, TimeUnit.SECONDS) // 쓰기 타임아웃
-                .readTimeout(120, TimeUnit.SECONDS) // 읽기 타임아웃
+    public PromptToImageManager() {
+        this.client = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(150, TimeUnit.SECONDS)
                 .build();
+    }
 
-        Response response = client.newCall(request).execute();
+    // prompt를 받아 매번 새로운 요청을 생성하고 이미지를 다운로드하는 메서드
+    public void downloadImage(String prompt) throws IOException {
+        OUTPUT_IMAGE_NUM++;
+        // 새로운 request 객체 생성
+        HuggingfaceRequestDto huggingfaceRequestDto = new HuggingfaceRequestDto(prompt);
+        Request request = huggingfaceRequestDto.generateJsonRequest();
         String outputPath = downloadDir + "/output_image" + OUTPUT_IMAGE_NUM + ".png";
 
-        FileOutputStream fos = new FileOutputStream(outputPath);
-        fos.write(response.body().bytes()); //이미지 바이트 배열 파일로 저장
+        // 요청을 실행하고 응답을 처리
+        try (Response response = client.newCall(request).execute();
+             FileOutputStream fos = new FileOutputStream(outputPath)) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Image download failed: " + response);
+            }
+            fos.write(response.body().bytes());
+            System.out.println("다운로드 완료: " + outputPath);
+        }
     }
 }
