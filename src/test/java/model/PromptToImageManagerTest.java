@@ -1,6 +1,5 @@
-package org.example.model;
+package model;
 
-import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 public class PromptToImageManagerTest {
@@ -10,14 +9,14 @@ public class PromptToImageManagerTest {
     @Test
     public void testImage1() {
         String prompt = "a hat on a cat";
+        String prompt1 = "a hat on a dog";
+        String prompt2 = "a hat on a bird";
         manager.downloadImage(prompt);
-        while(true);
-    }
+        manager.downloadImage(prompt1);
+        manager.downloadImage(prompt2);
+        while (true);
 
-    @Test
-    public void testImage2() {
-        String prompt = "a dog in the space";
-        manager.downloadImage(prompt);
-        while(true);
     }
 }
+
+

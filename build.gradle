@@ -1,3 +1,5 @@
+//gradle 버전 8.5
+//자바 17 버전 정상 동작 확인
 plugins {
     id 'java'
 }
@@ -7,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(17) // Java 17 버전에서 정상 동작 확인
     }
 }
 
@@ -15,23 +17,24 @@ repositories {
     mavenCentral()
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile) {//한글 주석 정상 처리 위함
     options.encoding = 'UTF-8'
 }
 
 dependencies {
-    // OkHttp 최신 버전
-    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0' // 서버 통신 위한 okhttp 최신 버전
     implementation 'com.squareup.okio:okio:3.4.0'  // okhttp3 사용시 하위 버전 보안 문제 발생으로 인한 명시적 의존성
 
-    // Jackson 최신 버전
-    //implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-
-    // JUnit 5 최신 버전
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0' //테스트 코드 작성용
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    
+    //이도훈 의존성 추가
+    implementation 'com.google.code.gson:gson:2.8.9'
+    //implementation 'com.squareup.okhttp3:okhttp:4.9.3' //상단에 최신버전 명시됨
 }
 
 test {
-    useJUnitPlatform()  // JUnit 5를 사용하도록 설정
+    useJUnitPlatform()
 }
+
+
