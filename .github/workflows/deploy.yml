@@ -46,7 +46,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST "echo '✅ EC2 연결 성공!'"
         
           # ✅ 최신 JAR 파일명 확인 후 전송
-          JAR_FILE=$(ls build/libs/*.jar | head -n 1)
+          JAR_FILE=$(ls build/libs/text_to_image_project-*.jar | head -n 1)
           echo "✅ 전송할 JAR 파일: $JAR_FILE"
           scp -o StrictHostKeyChecking=no -i ec2_key.pem "$JAR_FILE" $USER@$HOST:/home/ubuntu/app/latest.jar
         
