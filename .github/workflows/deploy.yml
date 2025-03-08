@@ -24,21 +24,20 @@ jobs:
           chmod +x gradlew
           ./gradlew clean build
 
-      - name: EC2에 배포
-        env:
-          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          HOST: ${{ secrets.EC2_HOST }}
-          USER: ${{ secrets.EC2_USER }}
-        run: |
-          echo "$PRIVATE_KEY" > ec2_key.pem
-          chmod 600 ec2_key.pem
-
-          # 최신 JAR 파일 전송
-          scp -i ec2_key.pem build/libs/*.jar $USER@$HOST:/home/ubuntu/app/app.jar
-
-          # EC2에서 애플리케이션 재시작
-          ssh -i ec2_key.pem $USER@$HOST <<EOF
-            sudo systemctl stop myapp || true
-            sudo mv /home/ubuntu/app/app.jar /home/ubuntu/app/latest.jar
-            sudo systemctl start myapp
-          EOF
+          - name: EC2에 배포
+          env:
+            PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+            HOST: ${{ secrets.EC2_HOST }}
+            USER: ${{ secrets.EC2_USER }}
+          run: |
+            echo "$PRIVATE_KEY" > ec2_key.pem
+            chmod 600 ec2_key.pem
+        
+            # EC2 서버의 공개 키를 자동으로 신뢰하도록 설정
+            ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST "echo 'EC2 연결 테스트'"
+        
+            # 최신 JAR 파일 전송 (StrictHostKeyChecking=no 옵션 추가)
+            scp -o StrictHostKeyChecking=no -i ec2_key.pem build/libs/*.jar $USER@$HOST:/home/ubuntu/app/app.jar
+        
+            # EC2에서 애플리케이션 재시작
+            ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST "sudo systemctl restart myapp"
