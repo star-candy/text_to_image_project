@@ -2,6 +2,11 @@
 //자바 17 버전 정상 동작 확인
 plugins {
     id 'java'
+    id 'application'
+}
+
+application {
+    mainClass = 'App'
 }
 
 group = 'com.example'
@@ -11,6 +16,10 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17) // Java 17 버전에서 정상 동작 확인
     }
+}
+
+tasks.named('run') {
+    standardInput = System.in
 }
 
 repositories {
