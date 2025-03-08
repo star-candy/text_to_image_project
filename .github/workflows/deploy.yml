@@ -26,26 +26,26 @@ jobs:
 
       - name: EC2에 배포
         env:
-          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}  # GitHub Secrets에서 SSH Private Key 가져오기
-          HOST: ${{ secrets.EC2_HOST }}  # EC2 IP 주소
-          USER: ${{ secrets.EC2_USER }}  # EC2 접속 사용자 (ubuntu)
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.EC2_USER }}
         run: |
           echo "$PRIVATE_KEY" > ec2_key.pem
           chmod 600 ec2_key.pem
-
-          # EC2 공개 키 등록
+        
+          # ✅ .ssh 디렉터리 생성 (없을 경우)
+          mkdir -p ~/.ssh
+        
+          # ✅ EC2 공개 키 등록
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
-
-          # SSH 연결 테스트
+        
+          # ✅ SSH 연결 테스트
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST "echo '✅ EC2 연결 성공!'"
-
-          # 1️⃣ EC2 서버의 공개 키를 자동으로 신뢰하도록 설정
-          ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST "echo 'EC2 연결 테스트 완료!'"
-
-          # 2️⃣ 최신 JAR 파일 전송 (StrictHostKeyChecking=no 옵션 추가)
+        
+          # ✅ 최신 JAR 파일 전송
           scp -o StrictHostKeyChecking=no -i ec2_key.pem build/libs/*.jar $USER@$HOST:/home/ubuntu/app/app.jar
-
-          # 3️⃣ EC2에서 애플리케이션 재시작
+        
+          # ✅ EC2에서 애플리케이션 재시작
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST <<EOF
             sudo systemctl stop myapp || true
             sudo mv /home/ubuntu/app/app.jar /home/ubuntu/app/latest.jar
