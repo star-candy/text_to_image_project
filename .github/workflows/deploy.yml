@@ -33,6 +33,12 @@ jobs:
           echo "$PRIVATE_KEY" > ec2_key.pem
           chmod 600 ec2_key.pem
 
+          # EC2 공개 키 등록
+          ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
+
+          # SSH 연결 테스트
+          ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST "echo '✅ EC2 연결 성공!'"
+
           # 1️⃣ EC2 서버의 공개 키를 자동으로 신뢰하도록 설정
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem $USER@$HOST "echo 'EC2 연결 테스트 완료!'"
 
